@@ -35,7 +35,7 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Pipeline.Workspace)/cloudguard'
+    targetPath: '$(System.DefaultWorkingDirectory)/cloudguard_output'
     artifact: 'cloudguard_output'
     publishLocation: 'pipeline'
   displayName: 'Publishing Artifacts'
