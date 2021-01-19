@@ -31,3 +31,11 @@ steps:
       regionName: 'us-east-1'
       scriptType: 'inline'
       inlineScript: 'cloudguard proact -t $(CLOUDGUARD_TOKEN)'
+  displayName: 'Running CloudGuard Proact'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/cloudguard'
+    artifact: 'cloudguard_output'
+    publishLocation: 'pipeline'
+  displayName: 'Publishing Artifacts'
