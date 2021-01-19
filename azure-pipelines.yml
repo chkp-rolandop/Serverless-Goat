@@ -30,4 +30,4 @@ steps:
       awsCredentials: 'aws-rolandopcp'
       regionName: 'us-east-1'
       scriptType: 'inline'
-      inlineScript: 'cloudguard proact -m template.yml'
+      inlineScript: 'cloudguard proact -i cloudguard.yml'
