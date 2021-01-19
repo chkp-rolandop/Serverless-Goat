@@ -3,10 +3,8 @@
 # Account Level information This Information can be also supplied as command line arguments.
 Account:
   # (boolean) (NotImplemented) an Indications to the tool whether to store the job results. The stored results can be viewed in the cloudguard ui.
-  StoreJobReport:  <true/false>
+  StoreJobReport:  true
   # (dictionary) keys and values that will be attached to the job results. can store information on the build environment.
-  Tags:
-    SomeKey: SomeValue
   # (String) The AWS region to be used.
   Region: us-east-1
 
@@ -53,109 +51,7 @@ Globals:
 Integrations:
   # Supported integrations : Cloudformation, Sam (Serverless integration will be part of the stack serverless.yml file)
   # only one integration can be specified.
-  Cloudformation:
-    # (String) the relative path to the cloudformation template file. (can be yaml OR json)
-    Template: template_dir/cf.json
-    # (dictionary) keys and values parameters that are needed in order to evaluate the given template..
-    Parameters:
-      ParamName: ParamValue
 
-  # only one integration can be specified.
   Sam:
     # (String) the relative path to the sam template file. (can be yaml OR json)
-    Template: template_dir/template.yaml
-    # (dictionary) keys and values parameters that are needed in order to evaluate the given template..
-    Parameters:
-      ParamName: ParamValue
-
-  # only one integration can be specified.
-  AzurePipelines:
-    # (String) the relative path to the azure pipeline file. (can be yaml OR json)
-    Pipeline: pipeline_dir/pipeline.yml
-
-# Functions section, will be used to detail the functions list.
-# For sam and serverless integrations the functions list can be taken from the template file.
-Functions:
-  # The function logical Name.
-  pythonInput:
-    # Each function section will be used to detail :
-    # 1: the function needed properties or any properties that we want to override from the integration template.
-    # 2: the function configuration overrides for the Global section.
-
-    # (String) The function friendly name.
-    # will be the name you will see in cloudguard reports (locally and remote)
-    FriendlyName: myFunctionFriendlyName
-
-    # (String) The runtime environment for the Lambda function. (python2.7, nodejs8.10, java8 ...)
-    Runtime : python2.7
-    # (String) The handler file.function that is called to begin executing your function.
-    Handler: handler.lambda_handler
-    # (String) the relative path to the functions code.
-    # Can be a directory or a zip file
-    # Must be located in the file system tree that is below the current working directory
-    # Relative to the file it is written in.
-    CodeLocation: ../../inputs/python_s3_create_bucket
-    # (List) A list of event source mappings source ARNs.
-    EventSourceMappings:
-      # The Amazon Resource Name (ARN) of the event source.
-      - EventSourceArn: arn:aws:kinesis:us-east-1:123456789012:stream/RecipientStream
-      - EventSourceArn: arn:aws:dynamodb:us-east-1:123456789012:table/myTable/stream/2017-11
-    # (dictionary) The function's dead letter queue configuration
-    DeadLetterConfig:
-      # (String) The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
-      TargetArn: arn:aws:sns:us-east-1:373507998356:func_name
-    # (dictionary) The function's AWS X-Ray tracing configuration.
-    TracingConfig:
-      # (String) The tracing mode.
-      Mode: Active
-    # (String) The function's execution role ARN.
-    Role: arn:aws:iam::123456789012:role/myRole
-    # A Role can be also a detailed AWS iam Statements list:
-    # Role:
-    #   Statement:
-    #     - Action:
-    #         - s3:*
-    #       Effect: Allow
-    #       Resource:
-    #         - "*"
-    #   Version: '2012-10-17'
-
-    # (dictionary) The function's environment variables.
-    Environment:
-      # (dictionary) Environment variable key-value pairs.
-      Variables:
-        MyKey: MyVal
-        MyKey2: MyVal2
-    # (dictionary) The function's networking configuration.
-    VpcConfig:
-      # (List) A list of VPC subnet IDs.
-      SubnetIds:
-        - subnetA
-        - subnetB
-    # (List) The Layers list that are used by that function.
-    # every layer can be identified by a layer Arn or a layer Name
-    Layers:
-      # (String) A LayerName that defined as a Local layer
-      - LayerName
-      # (String) A layer Arn, can be defined locally (by name) or remotely
-      - arn:aws:lambda:us-east-1:123456789012:layer:layer-name:1
-      # (dictionary) Another option is to pass the layer Name or Arn as a dictionary
-      - Name: LayerName
-        Arn: LayerArn
-
-    # Any Globals overrides for details see the Globals section.
-    # For example:
-    Enabled: true
-    Features:
-      VulnerableDependency:
-        Enabled: false
-
-# Local layers section
-Layers:
-  # the name of the local layer
-  LayerName:
-    # (String) the relative path to the layer code.
-    # Can be a directory or a zip file
-    # Must be located in the file system tree that is below the current working directory
-    CodeLocation: inputs/myLayer
-
+    Template: template.yaml
